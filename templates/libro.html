@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Libro - {{libro.title}}{% endblock %}
+
+{% block contenido %}
+    <h1>{{libro.title}}</h1>
+
+    {% if "MEAP" in libro.status %}
+        <p>ESTE LIBRO NO SE HA PUBLICADO</p>
+
+    {% else %}
+        <img src="{{libro.thumbnailUrl}}" alt="">
+        <p>Número de páginas: {{libro.pageCount}}</p>
+        <br />
+
+        <h2>Información sobre el libro: </h2>
+        <br>
+
+        <h3>Descripción</h3>
+
+            <p>{{libro.shortDescription}}</p>
+
+        <h3>Autor/es</h3>
+        <ul>
+            {% for autor in libro.authors -%}
+                <li>{{autor}}<li>
+            {% endfor -%}
+        </ul>
+        <br />
+
+        <h3>Categoría/s</h3>
+        <ul>
+            {% for categoria in libro.categories -%}
+                    <li><a href="/categoria/{{categoria}}">{{categoria}}</a></li>
+            {% endfor -%}
+        </ul>
+    {% endif %}
+
+{% endblock %}
